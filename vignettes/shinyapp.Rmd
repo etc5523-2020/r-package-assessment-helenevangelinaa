@@ -49,7 +49,6 @@ There are some datasets inside the package that can be used. Firstly, **covid19w
 
 To call the dataset, just run: covid19wrangled. Here is an example of how to use the dataset:
 ```{r covid19wrangled}
-library(covid19shiny)
 head(covid19wrangled)
 ```
 
