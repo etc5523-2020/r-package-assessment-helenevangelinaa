@@ -18,6 +18,8 @@ knitr::opts_chunk$set(
 # covid19shiny
 
 <!-- badges: start -->
+[![R build status](https://github.com/etc5523-2020/r-package-assessment-helenevangelinaa/workflows/R-CMD-check/badge.svg)](https://github.com/etc5523-2020/r-package-assessment-helenevangelinaa/actions)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 <!-- badges: end -->
 
 The goal of covid19shiny is to provide users with a shinydashboard created by using `shiny` and `shinydashboard` package, presenting the state of COVID-19 in the world, which is enhanced with user interactions. There are also some functions inside the package. The shiny application could be launched by using `launch_app()` function inside the package. This shinydashboard would allow users to gain insights of COVID-19 state in the world.

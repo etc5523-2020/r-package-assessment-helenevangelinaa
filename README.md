@@ -5,6 +5,10 @@
 
 <!-- badges: start -->
 
+[![R build
+status](https://github.com/etc5523-2020/r-package-assessment-helenevangelinaa/workflows/R-CMD-check/badge.svg)](https://github.com/etc5523-2020/r-package-assessment-helenevangelinaa/actions)
+[![License: GPL
+v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 <!-- badges: end -->
 
 The goal of covid19shiny is to provide users with a shinydashboard
