@@ -58,8 +58,26 @@ head(covid19total)
 ```
 
 **worldshp** is a world shape file needed to create a map.
-```{r worldshp}
-head(worldshp)
+```{r worldshp, eval = FALSE}
+# worldshp
+ leaflet(worldshp) %>% addTiles() %>%
+      addProviderTiles(providers$Stamen.Toner) %>%
+      addPolygons(stroke = FALSE,
+                  smoothFactor = 0.4,
+                  fillOpacity = 0.7, 
+                  fillColor = ~palpolygon(covid19total$caseper10000)) %>%
+      addLegend(values =~ covid19total$caseper10000, pal = palpolygon, title = "Cases per 10,000") %>%
+      addCircles(data = filterdata(),
+                 ~longitude, 
+                 ~latitude, 
+                 weight = 1,
+                 radius = ~(filterdata()$confirmed)^(1/4)*10000,
+                 popup = ~as.character(filterdata()$country),
+                 color = "#7777",
+                 fillColor = ~pal(filterdata()$confirmed), 
+                 fillOpacity = 0.6,
+                 label = lapply(labs, htmltools::HTML)) %>%
+      setView(40, 40, zoom = 1.45)
 ```
 
 ## Functions
@@ -142,9 +160,3 @@ These two visualisations can be updated by using the drop-down menu and slider i
 Drop-down menus, clickable buttons, as well as clickable map are provided in the second tab to allow user-interactions. 
 
 More detailed on how to use the app can be found on the **Instructions** tab of the dashboard.
-
-
-
-
-
-
