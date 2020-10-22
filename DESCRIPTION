@@ -36,7 +36,7 @@ Depends:
 Suggests: 
     knitr,
     rmarkdown,
-    stringr
+    stringi
 Remotes:
     github::joachim-gassen/tidycovid19,
     github::nset-ornl/wbstats

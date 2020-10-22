@@ -21,7 +21,7 @@ library(covid19shiny)
 ```{r, include = FALSE}
 library(dplyr)
 library(ggplot2)
-library(stringr)
+library(stringi)
 ```
 
 
