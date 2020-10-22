@@ -36,9 +36,6 @@ graph to represent the variable
 \- **covidtable** would produce a table by using the `DT` package, which
 is based on the specified dataset
 
-More information on the package can be found on the [pkgdown
-website](...).
-
 ## Installation
 
 You can install the development version of `covid19shiny` package with:

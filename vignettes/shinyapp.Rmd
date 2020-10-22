@@ -18,6 +18,12 @@ knitr::opts_chunk$set(
 library(covid19shiny)
 ```
 
+```{r, include = FALSE}
+library(dplyr)
+library(ggplot2)
+```
+
+
 This vignette is intended for the usage of `covid19shiny` package. It explains how to run the shiny application which illustrates the overview of Coronavirus state in the world and describes the functions contained inside the package, as well as guidelines for its use.  
 
 The package uses data sourced from [tidycovid19](https://github.com/joachim-gassen/tidycovid19) package created by Joachim Gassen by using the `download_merged_data` function, alongside with `countries.csv` file taken from Google Developers and Shapefile taken from thematicmapping.org. It is built by using the `shiny` and `shinydashboard` package to provide users with an interactive dashboard, exploring the state of the Coronavirus pandemic in the world. The purpose of the shinydashboard is to provide useful insights regarding the state of Coronavirus worldwide and explore deeper into it.
@@ -67,6 +73,46 @@ updateSelectInput(session, "country", selected = country)
 ```{r dailyplot, eval = FALSE}
 dailyplot(input$country, "death", "daily_death")
 ```
+
+The `dailyplot` function will create the following graph, which will be updated based on user input:
+```{r line-graph, warning = FALSE, message=FALSE}
+dailyall <- covid19wrangled %>%
+    group_by(date) %>%
+    summarise(totalconfirmed = sum(confirmed),
+              totaldeaths = sum(deaths),
+              totalrecovered = sum(recovered)) %>%
+    mutate(confirmed_lag = lag(totalconfirmed),
+           daily_confirmed = totalconfirmed - confirmed_lag,
+           death_lag = lag(totaldeaths),
+           daily_death = totaldeaths - death_lag,
+           recovered_lag = lag(totalrecovered),
+           daily_recovered = totalrecovered - recovered_lag)
+  
+  plot_all <- dailyall %>%
+    ggplot(aes_string(x = "date",
+               y= "daily_confirmed")) +
+    geom_col(fill = "#F09366") +
+    geom_line(size = 0, alpha = 0) +
+    geom_smooth(color = "red", size = 1) +
+    labs(x = "Date",
+         y = "Daily number of confirmed cases",
+         title = "Figure: Trend of Daily Number of confirmed cases") +
+    theme(panel.background = element_rect(fill = "grey16"),
+          plot.background = element_rect(fill = "grey16"),
+          panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank(),
+          plot.title = element_text(size = 12), 
+          plot.title.position = "plot",
+          text = element_text(color = "white"),
+          axis.text = element_text(color = "white"),
+          axis.line.x = element_line(color = "white",
+                                     size = 0.6),
+          axis.line.y = element_line(color = "white",
+                                     size = 0.6))
+  
+plot_all
+```
+
 
 - **covidtable** would produce a table by using the `DT` package based on the specified dataset. Fomat is `covidtable(data)`.
 ```{r covidtable, eval = FALSE}
