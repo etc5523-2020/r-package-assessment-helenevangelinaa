@@ -784,6 +784,7 @@ dailyall <- covid19wrangled %>%
           axis.line.y = element_line(color = "white",
                                      size = 0.6))
   
+  
 plot_all
 ```
 
